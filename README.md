@@ -5,7 +5,7 @@
 ## 引入
 ```
 dependencies:
-  f_verification_box: ^0.0.2
+  f_verification_box: lastest
 ```
 导入包：
 ```
