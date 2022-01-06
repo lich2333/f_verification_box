@@ -5,11 +5,11 @@
 ## 引入
 ```
 dependencies:
-  flutter_verification_box: ^0.0.1
+  f_verification_box: ^0.0.1
 ```
 导入包：
 ```
-import 'package:flutter_verification_box/verification_box.dart';
+import 'package:f_verification_box/f_verification_box.dart';
 ```
 
 ## 使用
