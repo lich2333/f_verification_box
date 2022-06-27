@@ -135,6 +135,7 @@ class _VerificationBox extends State<VerificationBox> {
               children: List.generate(widget.count, (index) {
                 return SizedBox(
                   width: widget.itemWidth,
+                  heigth:widget.itemWidth,
                   child: VerificationBoxItem(
                     itemWidth: widget.itemWidth,
                     data: _contentList[index],
