@@ -16,6 +16,7 @@ class VerificationBox extends StatefulWidget {
     this.onSubmitted,
     this.type = VerificationBoxItemType.box,
     this.decoration,
+    this.padding = 8.0,
     this.borderWidth = 2.0,
     this.borderRadius = 5.0,
     this.textStyle,
@@ -31,6 +32,8 @@ class VerificationBox extends StatefulWidget {
     this.cursorEndIndent = 10,
     this.onChanged,
   }) : super(key: key);
+
+  final double padding;
 
   /// 几位验证码，一般6位，还有4位的
   final int count;
@@ -131,29 +134,29 @@ class _VerificationBox extends State<VerificationBox> {
           Positioned.fill(
             top: 30,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(widget.count, (index) {
-                return SizedBox(
-                  width: widget.itemWidth,
-                  heigth:widget.itemWidth,
-                  child: VerificationBoxItem(
-                    itemWidth: widget.itemWidth,
-                    data: _contentList[index],
-                    textStyle: widget.textStyle,
-                    type: widget.type,
-                    decoration: widget.decoration,
-                    borderRadius: widget.borderRadius,
-                    borderWidth: widget.borderWidth,
-                    borderColor: (_controller.text.length == index
-                            ? widget.focusBorderColor
-                            : widget.borderColor) ??
-                        widget.borderColor,
-                    showCursor:
-                        widget.showCursor && _controller.text.length == index,
-                    cursorColor: widget.cursorColor,
-                    cursorWidth: widget.cursorWidth,
-                    cursorIndent: widget.cursorIndent,
-                    cursorEndIndent: widget.cursorEndIndent,
+                return Padding(
+                  padding: EdgeInsets.all(widget.padding),
+                  child: SizedBox(
+                    width: widget.itemWidth,
+                    height: widget.itemWidth,
+                    child: VerificationBoxItem(
+                      itemWidth: widget.itemWidth,
+                      data: _contentList[index],
+                      textStyle: widget.textStyle,
+                      type: widget.type,
+                      decoration: widget.decoration,
+                      borderRadius: widget.borderRadius,
+                      borderWidth: widget.borderWidth,
+                      borderColor: (_controller.text.length == index ? widget.focusBorderColor : widget.borderColor) ??
+                          widget.borderColor,
+                      showCursor: widget.showCursor && _controller.text.length == index,
+                      cursorColor: widget.cursorColor,
+                      cursorWidth: widget.cursorWidth,
+                      cursorIndent: widget.cursorIndent,
+                      cursorEndIndent: widget.cursorEndIndent,
+                    ),
                   ),
                 );
               }),
@@ -171,12 +174,9 @@ class _VerificationBox extends State<VerificationBox> {
       controller: _controller,
       focusNode: _focusNode,
       decoration: const InputDecoration(
-        border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.transparent)),
-        enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.transparent)),
-        focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.transparent)),
+        border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
+        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
+        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
       ),
       cursorWidth: 0,
       autofocus: widget.autoFocus,
