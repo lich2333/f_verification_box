@@ -136,6 +136,7 @@ class _VerificationBox extends State<VerificationBox> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        isInEditer = false;
         FocusScope.of(context).requestFocus(_focusNode);
       },
       child: Stack(
@@ -203,6 +204,7 @@ class _VerificationBox extends State<VerificationBox> {
       onChanged: _onValueChange,
       onEditingComplete: () {
         isInEditer = false;
+        FocusScope.of(context).requestFocus(_focusNode);
       },
       onTap: () {
         if (isInEditer == false) {
