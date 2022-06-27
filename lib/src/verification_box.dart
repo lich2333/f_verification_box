@@ -140,7 +140,7 @@ class _VerificationBox extends State<VerificationBox> {
                   padding: EdgeInsets.all(widget.padding),
                   child: SizedBox(
                     width: widget.itemWidth,
-                    height: widget.itemWidth,
+                    height: widget.itemWidth+widget.padding*2,
                     child: VerificationBoxItem(
                       itemWidth: widget.itemWidth,
                       data: _contentList[index],
