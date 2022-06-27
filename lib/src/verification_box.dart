@@ -9,7 +9,8 @@ typedef OnSubmitted = void Function(String text, Function? clear);
 
 /// 验证码输入框
 class VerificationBox extends StatefulWidget {
-  const VerificationBox(this.ctrl ,{
+  const VerificationBox(
+    this.ctrl, {
     Key? key,
     this.count = 6,
     this.itemWidth = 45,
@@ -30,7 +31,6 @@ class VerificationBox extends StatefulWidget {
     this.cursorPosition,
     this.cursorIndent = 10,
     this.cursorEndIndent = 10,
-    
     this.onChanged,
   }) : super(key: key);
 
@@ -118,6 +118,14 @@ class _VerificationBox extends State<VerificationBox> {
       widget.ctrl.text = '';
       setState(() {});
     };
+    var value = widget.ctrl.text;
+    for (int i = 0; i < widget.count; i++) {
+      if (i < value.length) {
+        _contentList[i] = value.substring(i, i + 1);
+      } else {
+        _contentList[i] = '';
+      }
+    }
 
     _focusNode = FocusNode();
     super.initState();
@@ -193,7 +201,7 @@ class _VerificationBox extends State<VerificationBox> {
       style: const TextStyle(color: Colors.transparent),
       onChanged: _onValueChange,
       onTap: () {
-        widget.ctrl.text = '';
+        clear();
       },
     );
   }
