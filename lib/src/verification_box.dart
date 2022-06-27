@@ -9,7 +9,7 @@ typedef OnSubmitted = void Function(String text, Function? clear);
 
 /// 验证码输入框
 class VerificationBox extends StatefulWidget {
-  const VerificationBox({
+  const VerificationBox(this.ctrl ,{
     Key? key,
     this.count = 6,
     this.itemWidth = 45,
@@ -30,7 +30,7 @@ class VerificationBox extends StatefulWidget {
     this.cursorPosition,
     this.cursorIndent = 10,
     this.cursorEndIndent = 10,
-    this.ctrl = TextEditingController(),
+    
     this.onChanged,
   }) : super(key: key);
 
