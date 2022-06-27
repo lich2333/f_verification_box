@@ -137,7 +137,7 @@ class _VerificationBox extends State<VerificationBox> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(widget.count, (index) {
                 return Padding(
-                  padding: EdgeInsets.all(widget.padding),
+                  padding:  EdgeInsets.symmetric( horizontal:widget.padding),
                   child: SizedBox(
                     width: widget.itemWidth,
                     height: widget.itemWidth+widget.padding*2,
