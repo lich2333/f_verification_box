@@ -9,15 +9,15 @@ import 'package:flutter/material.dart';
 
 class DefaultPage extends StatelessWidget {
   static const String routeName = '/default_page';
-  const DefaultPage({Key? key}) : super(key: key);
-
+  DefaultPage({Key? key}) : super(key: key);
+  final TextEditingController _codeEdit = TextEditingController(text: '8888');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('默认格式')),
-      body: const SizedBox(
+      body: SizedBox(
         height: 65,
-        child: VerificationBox(),
+        child: VerificationBox(_codeEdit),
       ),
     );
   }

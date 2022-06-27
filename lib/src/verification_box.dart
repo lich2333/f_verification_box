@@ -104,6 +104,7 @@ class _VerificationBox extends State<VerificationBox> {
   late FocusNode _focusNode;
 
   final List _contentList = [];
+  bool isInEditer = false;
 
   @override
   void initState() {
@@ -200,8 +201,15 @@ class _VerificationBox extends State<VerificationBox> {
       keyboardType: TextInputType.number,
       style: const TextStyle(color: Colors.transparent),
       onChanged: _onValueChange,
+      onEditingComplete: () {
+        isInEditer = false;
+      },
       onTap: () {
-        clear();
+        if (isInEditer == false) {
+          isInEditer = true;
+          clear();
+        }
+        
       },
     );
   }

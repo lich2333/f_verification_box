@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: <String, WidgetBuilder>{
-        DefaultPage.routeName: (_) => const DefaultPage(),
+        DefaultPage.routeName: (_) => DefaultPage(),
       },
       home: Scaffold(
         appBar: AppBar(title: const Text('验证码')),
