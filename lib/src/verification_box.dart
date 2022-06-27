@@ -30,9 +30,11 @@ class VerificationBox extends StatefulWidget {
     this.cursorPosition,
     this.cursorIndent = 10,
     this.cursorEndIndent = 10,
+    this.ctrl = TextEditingController(),
     this.onChanged,
   }) : super(key: key);
 
+  final TextEditingController ctrl;
   final double padding;
 
   /// 几位验证码，一般6位，还有4位的
@@ -98,7 +100,6 @@ class VerificationBox extends StatefulWidget {
 
 class _VerificationBox extends State<VerificationBox> {
   late Function clear;
-  late TextEditingController _controller;
 
   late FocusNode _focusNode;
 
@@ -114,11 +115,11 @@ class _VerificationBox extends State<VerificationBox> {
       for (int i = 0; i < widget.count; i++) {
         _contentList[i] = '';
       }
-      _controller.text = '';
+      widget.ctrl.text = '';
       setState(() {});
     };
 
-    _controller = TextEditingController();
+    widget.ctrl = TextEditingController();
     _focusNode = FocusNode();
     super.initState();
   }
@@ -137,10 +138,10 @@ class _VerificationBox extends State<VerificationBox> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(widget.count, (index) {
                 return Padding(
-                  padding:  EdgeInsets.symmetric( horizontal:widget.padding),
+                  padding: EdgeInsets.symmetric(horizontal: widget.padding),
                   child: SizedBox(
                     width: widget.itemWidth,
-                    height: widget.itemWidth+widget.padding*2,
+                    height: widget.itemWidth + widget.padding * 2,
                     child: VerificationBoxItem(
                       itemWidth: widget.itemWidth,
                       data: _contentList[index],
@@ -149,9 +150,9 @@ class _VerificationBox extends State<VerificationBox> {
                       decoration: widget.decoration,
                       borderRadius: widget.borderRadius,
                       borderWidth: widget.borderWidth,
-                      borderColor: (_controller.text.length == index ? widget.focusBorderColor : widget.borderColor) ??
+                      borderColor: (widget.ctrl.text.length == index ? widget.focusBorderColor : widget.borderColor) ??
                           widget.borderColor,
-                      showCursor: widget.showCursor && _controller.text.length == index,
+                      showCursor: widget.showCursor && widget.ctrl.text.length == index,
                       cursorColor: widget.cursorColor,
                       cursorWidth: widget.cursorWidth,
                       cursorIndent: widget.cursorIndent,
@@ -171,7 +172,7 @@ class _VerificationBox extends State<VerificationBox> {
   /// 构建TextField
   _buildTextField() {
     return TextField(
-      controller: _controller,
+      controller: widget.ctrl,
       focusNode: _focusNode,
       decoration: const InputDecoration(
         border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
@@ -192,6 +193,9 @@ class _VerificationBox extends State<VerificationBox> {
       keyboardType: TextInputType.number,
       style: const TextStyle(color: Colors.transparent),
       onChanged: _onValueChange,
+      onTap: () {
+        widget.ctrl.text = '';
+      },
     );
   }
 
