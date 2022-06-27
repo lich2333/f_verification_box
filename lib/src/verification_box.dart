@@ -104,7 +104,6 @@ class _VerificationBox extends State<VerificationBox> {
   late FocusNode _focusNode;
 
   final List _contentList = [];
-  bool isInEditer = false;
 
   @override
   void initState() {
@@ -136,7 +135,6 @@ class _VerificationBox extends State<VerificationBox> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        isInEditer = false;
         FocusScope.of(context).requestFocus(_focusNode);
       },
       child: Stack(
@@ -159,7 +157,10 @@ class _VerificationBox extends State<VerificationBox> {
                       decoration: widget.decoration,
                       borderRadius: widget.borderRadius,
                       borderWidth: widget.borderWidth,
-                      borderColor: (widget.ctrl.text.length == index ? widget.focusBorderColor : widget.borderColor) ??
+                      borderColor: (widget.ctrl.text.length == index ||
+                                  (widget.ctrl.text.length >= widget.count && index == (widget.count - 1))
+                              ? widget.focusBorderColor
+                              : widget.borderColor) ??
                           widget.borderColor,
                       showCursor: widget.showCursor && widget.ctrl.text.length == index,
                       cursorColor: widget.cursorColor,
@@ -189,6 +190,7 @@ class _VerificationBox extends State<VerificationBox> {
         focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
       ),
       cursorWidth: 0,
+      textInputAction: TextInputAction.done,
       autofocus: widget.autoFocus,
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
       maxLength: widget.count,
@@ -203,14 +205,10 @@ class _VerificationBox extends State<VerificationBox> {
       style: const TextStyle(color: Colors.transparent),
       onChanged: _onValueChange,
       onEditingComplete: () {
-        isInEditer = false;
         FocusScope.of(context).requestFocus(_focusNode);
       },
       onTap: () {
-        if (isInEditer == false) {
-          isInEditer = true;
-          clear();
-        }
+
         
       },
     );
