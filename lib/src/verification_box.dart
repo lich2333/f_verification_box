@@ -119,7 +119,6 @@ class _VerificationBox extends State<VerificationBox> {
       setState(() {});
     };
 
-    widget.ctrl = TextEditingController();
     _focusNode = FocusNode();
     super.initState();
   }
